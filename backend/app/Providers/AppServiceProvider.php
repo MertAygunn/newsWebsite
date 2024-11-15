@@ -10,7 +10,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Passport::routes();
+        //Passport::routes();
     }
 
     public function register()
