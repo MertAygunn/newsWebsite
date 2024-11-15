@@ -27,7 +27,7 @@ return [
     | Of course, a great default configuration has been defined for you
     | which utilizes session storage plus the Eloquent user provider.
     |
-    | Supported: "session", "token", "passport"
+    | Supported: "session", "token"
     |
     */
 
@@ -38,7 +38,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => '*',
             'provider' => 'users',
         ],
     ],
