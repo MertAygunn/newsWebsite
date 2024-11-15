@@ -13,7 +13,7 @@ export default function HomePage() {
   const API_URL = 'http://localhost:8000/api'; // Laravel API URL'si
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Formun varsayılan davranışını engelle
 
     try {
       const response = await axios.post(`${API_URL}/register`, {
@@ -21,13 +21,19 @@ export default function HomePage() {
         email,
         password,
       });
+      console.log("Kayıt başarılı:", response.data);
       setSuccess('Kayıt başarılı!');
       setError('');
-      console.log("Kayıt başarılı:", response.data);
     } catch (err) {
-      setError('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.');
+      if (axios.isAxiosError(err)) {
+        // err.response mevcutsa güvenle erişebilirsiniz
+        console.error("Kayıt hatası:", err.response?.data || err.message);
+        setError('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.');
+      } else {
+        console.error("Beklenmeyen bir hata oluştu:", err);
+        setError('Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+      }
       setSuccess('');
-      console.error("Kayıt hatası:");
     }
   };
 
@@ -39,14 +45,20 @@ export default function HomePage() {
         email,
         password,
       });
+      console.log("Giriş başarılı:", response.data);
       setSuccess('Giriş başarılı!');
       setError('');
-      console.log("Giriş başarılı:", response.data);
       // Başarılı giriş sonrası yönlendirme yapabilirsiniz
     } catch (err) {
-      setError('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
+      if (axios.isAxiosError(err)) {
+        // err.response mevcutsa güvenle erişebilirsiniz
+        console.error("Giriş hatası:", err.response?.data || err.message);
+        setError('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
+      } else {
+        console.error("Beklenmeyen bir hata oluştu:", err);
+        setError('Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+      }
       setSuccess('');
-      console.error("Giriş hatası:");
     }
   };
 
@@ -68,10 +80,10 @@ export default function HomePage() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
+          <label htmlFor="register-email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
           <input
             type="email"
-            id="email"
+            id="register-email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -98,10 +110,10 @@ export default function HomePage() {
       <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
         <h2 className="text-xl font-bold mb-4">Giriş Yap</h2>
         <div className="mb-4">
-          <label htmlFor=" email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
+          <label htmlFor="login-email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
           <input
             type="email"
-            id="email"
+            id="login-email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -109,10 +121,10 @@ export default function HomePage() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Şifre:</label>
+          <label htmlFor="login-password" className="block text-gray-700 text-sm font-bold mb-2">Şifre:</label>
           <input
             type="password"
-            id="password"
+            id="login-password"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -124,6 +136,7 @@ export default function HomePage() {
         </button>
       </form>
 
+      {/* Hata ve Başarı Mesajları */}
       {error && <p className="text-red-500">{error}</p>}
       {success && <p className="text-green-500">{success}</p>}
     </div>
