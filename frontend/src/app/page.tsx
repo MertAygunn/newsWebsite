@@ -1,144 +1,142 @@
+// app/page.tsx
+
 "use client";
 
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Image from 'next/image'; 
+import LoginRegisterForm from './components/LoginRegisterForm'; 
+import Modal from './components/Modal'; 
+import VideoSection from "./components/VideoSection";
+
+// Post arayüzü
+interface Post {
+  id: number; 
+  title: string; 
+  content: string; 
+  image: string | null; 
+  created_at: string; 
+}
 
 export default function HomePage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [postTitle, setPostTitle] = useState<string>(""); 
+  const [postContent, setPostContent] = useState<string>(""); 
+  const [postImage, setPostImage] = useState<File | null>(null); 
+  const [posts, setPosts] = useState<Post[]>([]); 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Kullanıcı giriş durumu
+  const API_URL = 'http://localhost:8000/api/posts'; 
 
-  const API_URL = 'http://localhost:8000/api'; // Laravel API URL'si
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault(); // Formun varsayılan davranışını engelle
-
-    try {
-      const response = await axios.post(`${API_URL}/register`, {
-        name,
-        email,
-        password,
-      });
-      console.log("Kayıt başarılı:", response.data);
-      setSuccess('Kayıt başarılı!');
-      setError('');
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        // err.response mevcutsa güvenle erişebilirsiniz
-        console.error("Kayıt hatası:", err.response?.data || err.message);
-        setError('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.');
-      } else {
-        console.error("Beklenmeyen bir hata oluştu:", err);
-        setError('Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get<Post[]>(API_URL); 
+        setPosts(response.data); 
+      } catch (error) {
+        console.error('Gönderiler alınırken hata oluştu:', error);
       }
-      setSuccess('');
-    }
-  };
+    };
 
-  const handleLogin = async (e: React.FormEvent) => {
+    fetchPosts();
+  }, []);
+
+  const handlePostSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post(`${API_URL}/login`, {
-        email,
-        password,
-      });
-      console.log("Giriş başarılı:", response.data);
-      setSuccess('Giriş başarılı!');
-      setError('');
-      // Başarılı giriş sonrası yönlendirme yapabilirsiniz
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        // err.response mevcutsa güvenle erişebilirsiniz
-        console.error("Giriş hatası:", err.response?.data || err.message);
-        setError('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
-      } else {
-        console.error("Beklenmeyen bir hata oluştu:", err);
-        setError('Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+    if (postTitle.trim() && postContent.trim()) {
+      const formData = new FormData();
+      formData.append('title', postTitle);
+      formData.append('content', postContent);
+      if (postImage) {
+        formData.append('image', postImage);
       }
-      setSuccess('');
+
+      try {
+        const response = await axios.post<Post>(API_URL, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        setPosts((prevPosts) => [...prevPosts, response.data]); 
+        setPostTitle(""); 
+        setPostContent(""); 
+        setPostImage(null); 
+      } catch (error) {
+        console.error('Gönderi eklenirken hata oluştu:', error);
+      }
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100">
       <h1 className="text-3xl font-bold mb-6">Ana Sayfa</h1>
 
-      {/* Kayıt Formu */}
-      <form onSubmit={handleRegister} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Ad:</label>
-          <input
-            type="text"
-            id="name"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="register-email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
-          <input
-            type="email"
-            id="register-email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Şifre:</label>
-          <input
-            type="password"
-            id="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Kayıt Ol
-        </button>
-      </form>
+      {/* VideoSection Bileşeni */}
+      <div className="w-full flex justify-center mb-6">
+        <VideoSection />
+      </div>
 
-      {/* Giriş Formu */}
-      <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
-        <h2 className="text-xl font-bold mb-4">Giriş Yap</h2>
-        <div className="mb-4">
-          <label htmlFor="login-email" className="block text-gray-700 text-sm font-bold mb-2">E-posta:</label>
-          <input
-            type="email"
-            id="login-email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="login-password" className="block text-gray-700 text-sm font-bold mb-2">Şifre:</label>
-          <input
-            type="password"
-            id="login-password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Giriş Yap
-        </button>
-      </form>
+      {/* Kullanıcı Giriş Durumu Kontrolü */}
+      {isLoggedIn ? (
+        <>
+          {/* Gönderi Paylaşım Formu */}
+          <form onSubmit={handlePostSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xl">
+            <input
+              type="text"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+              placeholder="Başlık"
+              value={postTitle}
+              onChange={(e) => setPostTitle(e.target.value)}
+              required
+            />
+            <textarea
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+              rows={4}
+              placeholder="İçerik"
+              value={postContent}
+              onChange={(e) => setPostContent(e.target.value)}
+              required
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setPostImage(e.target.files ? e.target.files[0] : null)}
+              className="mb-4"
+            />
+            <button type="submit" className="bg-blue-500 hover:bg-blue- 700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Gönder
+            </button>
+          </form>
 
-      {/* Hata ve Başarı Mesajları */}
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">{success}</p>}
+          {/* Gönderi Listesi */}
+          <div className="w-full max-w-xl">
+            {posts.map((post) => (
+              <div key={post.id} className="bg-white shadow-md rounded px-4 py-2 mb-4">
+                <h2 className="font-bold">{post.title}</h2>
+                <p>{post.content}</p>
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={500}
+                    height={300}
+                    className="mt-2"
+                  />
+                ) : (
+                  <p className="text-gray-500">Görsel mevcut değil.</p>
+                )}
+                <small className="text-gray-500">{new Date(post.created_at).toLocaleString()}</small>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="text-gray-500">Lütfen giriş yapın veya kayıt olun.</p>
+      )}
+
+      {/* Modal Bileşeni */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <LoginRegisterForm onClose={() => setIsModalOpen(false)} setIsLoggedIn={setIsLoggedIn} />
+      </Modal>
     </div>
   );
 }
