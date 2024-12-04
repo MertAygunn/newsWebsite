@@ -30,13 +30,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Kullanıcı oluşturulurken şifreyi hash'lemek için
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            $user->password = bcrypt($user->password);
-        });
-    }
+    // Kullanıcı oluşturulurken şifreyi hash'lemek için boot metodunu kaldırdık
 }
