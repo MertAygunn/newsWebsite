@@ -32,8 +32,7 @@ const Footer = () => {
           </a>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Sizin için Yalova Sokaklarında Röportajlar Yapıyoruz. Anlatımlar
-              Yoluyla Kısa Videolar ve Özel içerikler oluşturuyoruz.
+              Yazılım ve teknoloji alanında haberler yayınlıyoruz. Ayrıca kullanıcı haberleri yayınlamak için bir platformuz.
             </p>
             <p className="mt-4 text-sm text-gray-800">
             Bizi takip
@@ -64,7 +63,7 @@ const Footer = () => {
               title="Our email"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              yalovaTest77@gmail.com
+              kodhaber@gmail.com
             </a>
           </div>
           <div className="flex">
@@ -87,7 +86,7 @@ const Footer = () => {
           </span>
           <div className="flex items-center mt-1 space-x-3">
             <a
-              href="https://www.youtube.com/channel/UCWZHpZtQp6FyJCEiuwJ6pdQ"
+              href="https://www.youtube.com/channel/kodhaber"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               <svg viewBox="0 0 26 18" fill="currentColor" className="h-5">
@@ -95,7 +94,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/yalovakonusuyor/"
+              href="https://www.instagram.com/kodhaber/"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
@@ -104,7 +103,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="/"
+              href="https://www.facebook.com/kodhaber/"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
@@ -124,7 +123,6 @@ const Footer = () => {
           width="100%"
           height="450"
           style={{ border: "0" }}
-          allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="Yalova Merkez Map"
@@ -132,7 +130,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row">
         <p className="text-sm text-gray-600">
-          © Telif Hakkı 2024 Yalova Konuşuyor Tüm Hakları Saklıdır.
+          © Telif Hakkı 2024 Kodhaber Tüm Hakları Saklıdır.
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>
