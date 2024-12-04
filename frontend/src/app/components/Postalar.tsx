@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link"; 
+import Link from "next/link";
 import { HiOutlineThumbUp, HiChatAlt, HiShare } from "react-icons/hi";
 import { useState } from "react";
 
@@ -27,10 +27,10 @@ function Postalar({
   const [showModal, setShowModal] = useState(false); // Modal durumunu kontrol etmek için
 
   const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (commentInput.trim()) {
-      setComments([...comments, commentInput]); 
-      setCommentInput(""); 
+      setComments([...comments, commentInput]);
+      setCommentInput("");
     }
   };
 
@@ -97,11 +97,17 @@ function Postalar({
           <HiOutlineThumbUp className="h-5 w-5" />
           <p className="text-xs sm:text-base">Beğen</p>
         </div>
-        <div className="flex items-center space-x-1 cursor-pointer hover:bg-gray-100 p-2 rounded-xl" onClick={handleToggleCommentForm}>
+        <div
+          className="flex items-center space-x-1 cursor-pointer hover:bg-gray-100 p-2 rounded-xl"
+          onClick={handleToggleCommentForm}
+        >
           <HiChatAlt className="h-5 w-5" />
           <p className="text-xs sm:text-base">Yorum</p>
         </div>
-        <div className="flex items-center space-x-1 cursor-pointer hover:bg-gray-100 p-2 rounded-xl" onClick={handleToggleModal}>
+        <div
+          className="flex items-center space-x-1 cursor-pointer hover:bg-gray-100 p-2 rounded-xl"
+          onClick={handleToggleModal}
+        >
           <HiShare className="h-5 w-5" />
           <p className="text-xs sm:text-base">Paylaş</p>
         </div>
@@ -109,7 +115,10 @@ function Postalar({
 
       {/* Yorum Ekleme Formu */}
       {showCommentForm && (
-        <form onSubmit={handleCommentSubmit} className="mt-4 p-4 bg-gray-50 rounded-lg">
+        <form
+          onSubmit={handleCommentSubmit}
+          className="mt-4 p-4 bg-gray-50 rounded-lg"
+        >
           <div className="w-full flex items-start space-x-4">
             <Image
               className="w-10 h-10 object-cover rounded-full"
@@ -118,7 +127,7 @@ function Postalar({
             />
             <textarea
               value={commentInput}
-              onChange={(e) => setCommentInput(e.target.value)} 
+              onChange={(e) => setCommentInput(e.target.value)}
               rows={5}
               className="w-full px-5 py-3 rounded-2xl border border-gray-300 shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] resize-none focus:outline-none placeholder-gray-400 text-gray-900 text-lg font-normal leading-7"
               placeholder="Yorumunuzu yazın...."
@@ -128,7 +137,9 @@ function Postalar({
             type="submit"
             className="mt-3 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 ease-in-out rounded-xl shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)]"
           >
-            <span className="text-white font-semibold text-lg">Yorum Gönder</span>
+            <span className="text-white font-semibold text-lg">
+              Yorum Gönder
+            </span>
           </button>
         </form>
       )}
@@ -145,7 +156,8 @@ function Postalar({
             <div className="flex flex-col w-full">
               <p className="text-gray-900 font-semibold">Kemal Hakan</p>
               <p className="text-gray-700">{comment}</p>
-              <div className="border-t mt-2 pt-2"></div> {/* Yorumun altındaki çizgi */}
+              <div className="border-t mt-2 pt-2"></div>{" "}
+              {/* Yorumun altındaki çizgi */}
             </div>
           </div>
         ))}
@@ -171,8 +183,16 @@ function Postalar({
             <div className="my-8">
               <h6 className="text-base text-gray-800">Bu Linki Paylaş</h6>
               <div className="flex flex-wrap gap-4 mt-4">
-                <button type="button" className="w-10 h-10 inline-flex items-center justify-center rounded-full border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" fill="#fff" viewBox="0 0 155.139 155.139">
+                <button
+                  type="button"
+                  className="w-10 h-10 inline-flex items-center justify-center rounded-full border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20px"
+                    fill="#fff"
+                    viewBox="0 0 155.139 155.139"
+                  >
                     <path d="M89.584 155.139V84.378h23.742l3.562-27.585H89.584V39.184c0-7.984 2.208-13.425 13.67-13.425l14.595-.006V1.08C115.325.752 106.661 0 96.577 0 75.52 0 61.104 12.853 61.104 36.452v20.341H37.29v27.585h23.814v70.761h28.48z" />
                   </svg>
                 </button>
@@ -183,8 +203,12 @@ function Postalar({
             <div>
               <h6 className="text-base text-gray-800">Veya Linki Kopyala</h6>
               <div className="w-full rounded-lg overflow-hidden border border-gray-300 flex items-center mt-4">
-                <p className="text-sm text-gray-500 flex-1 ml-4">https://link.com</p>
-                <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 text-sm text-white">Kopyala</button>
+                <p className="text-sm text-gray-500 flex-1 ml-4">
+                  https://link.com
+                </p>
+                <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 text-sm text-white">
+                  Kopyala
+                </button>
               </div>
             </div>
           </div>
