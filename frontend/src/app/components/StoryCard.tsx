@@ -27,6 +27,7 @@ function StoryCard({ name, story, profile, videoUrl, onClick }: StoryCardProps) 
         src={story}
         fill // Resmin kapsayıcı alanını doldurmasını sağlar
         alt={name} // Alt metni isme göre güncellendi
+        sizes="(max-width: 600px) 80vw, 40rem" // Ekran genişliğine göre görsel boyutunu belirleyin
       />
       <p className="absolute opacity-0 lg:opacity-100 z-50 text-white font-semibold bottom-5">
         {name}

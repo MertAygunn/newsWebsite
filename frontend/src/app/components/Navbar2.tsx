@@ -34,7 +34,7 @@ const Navbar2 = () => {
     "Sanat",
     "Donanım & Yazılım",
     "ALES",
-    "Tarih"
+    "Tarih",
   ];
 
   return (
@@ -47,8 +47,13 @@ const Navbar2 = () => {
             title="Company"
             className="inline-flex items-center"
           >
-            <Image src="/images/kodhaber.png" alt="Logo" width={128} height={128} />
-            
+            <Image
+              src="/images/kodhaber.png"
+              alt="Logo"
+              width={128}
+              height={128}
+              priority
+            />
           </Link>
 
           {/* Geniş 3 logolu kısım */}
@@ -78,13 +83,16 @@ const Navbar2 = () => {
               {/* Dropdown */}
               {dropdownOpen && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 top-full border border-gray-500 rounded-lg bg-white w-[500px] mt-0 z-50 transition-all duration-300 ease-in-out">
-                  <div className="grid grid-cols-3 gap-4 p-4"> {/* 3 sütun düzeni */}
+                  <div className="grid grid-cols-3 gap-4 p-4">
+                    {" "}
+                    {/* 3 sütun düzeni */}
                     {dropdownOptions.map((option, index) => (
                       <button
                         key={index}
                         onClick={() => alert(`${option} seçildi`)}
-                        className={`w-full px-6 py-2 text-lg text-black hover:text-sky-500 rounded-lg transition-colors duration-200 ${index < 3 ? 'font-bold' : ''}`}
-
+                        className={`w-full px-6 py-2 text-lg text-black hover:text-sky-500 rounded-lg transition-colors duration-200 ${
+                          index < 3 ? "font-bold" : ""
+                        }`}
                       >
                         {option}
                       </button>

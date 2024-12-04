@@ -16,6 +16,7 @@ function Category({ title, logo }: CategoryProps) {
             alt={title} 
             fill // Resmin kapsayıcı alanını doldurmasını sağlar
             style={{ objectFit: 'cover' }} // Resmin kesilmeden görünmesini sağlar
+            sizes="(max-width: 600px) 25vw, 6rem" // Ekran genişliğine göre görsel boyutunu belirleyin
           />
         </div>
       )}
