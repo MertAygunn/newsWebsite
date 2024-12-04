@@ -111,7 +111,7 @@ function Postalar({
       {showCommentForm && (
         <form onSubmit={handleCommentSubmit} className="mt-4 p-4 bg-gray-50 rounded-lg">
           <div className="w-full flex items-start space-x-4">
-            <img
+            <Image
               className="w-10 h-10 object-cover rounded-full"
               src="https://pagedone.io/asset/uploads/1710225753.png"
               alt="John smith image"
@@ -137,7 +137,7 @@ function Postalar({
       <div className="mt-4 px-4">
         {comments.map((comment, index) => (
           <div key={index} className="flex items-start space-x-4 border-b py-4">
-            <img
+            <Image
               className="w-10 h-10 object-cover rounded-full"
               src="https://pagedone.io/asset/uploads/1710225753.png"
               alt="Yorum sahibi profil resmi"
