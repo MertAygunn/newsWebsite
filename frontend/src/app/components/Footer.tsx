@@ -1,12 +1,14 @@
 // app/components/Footer.tsx
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <div className="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
-          <a
+          <Link
             href="/"
+            passHref
             aria-label="Go home"
             title="Company"
             className="inline-flex items-center"
@@ -29,14 +31,14 @@ const Footer = () => {
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
               Firmamız
             </span>
-          </a>
+          </Link>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
-              Yazılım ve teknoloji alanında haberler yayınlıyoruz. Ayrıca kullanıcı haberleri yayınlamak için bir platformuz.
+              Yazılım ve teknoloji alanında haberler yayınlıyoruz. Ayrıca
+              kullanıcı haberleri yayınlamak için bir platformuz.
             </p>
             <p className="mt-4 text-sm text-gray-800">
-            Bizi takip
-            etmeyi unutmayın..
+              Bizi takip etmeyi unutmayın..
             </p>
           </div>
         </div>
@@ -46,29 +48,29 @@ const Footer = () => {
           </p>
           <div className="flex">
             <p className="mr-1 text-gray-800">Telefon:</p>
-            <a
+            <Link
               href="tel:850-123-5021"
               aria-label="Our phone"
               title="Our phone"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
               555-222-333
-            </a>
+            </Link>
           </div>
           <div className="flex">
             <p className="mr-1 text-gray-800">E-mail:</p>
-            <a
+            <Link
               href="mailto:info@lorem.mail"
               aria-label="Our email"
               title="Our email"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
               kodhaber@gmail.com
-            </a>
+            </Link>
           </div>
           <div className="flex">
             <p className="mr-1 text-gray-800">Adres:</p>
-            <a
+            <Link
               href="https://www.google.com/maps?ll=40.657911,29.27102&z=18&t=m&hl=tr&gl=TR&mapclient=embed&q=40%C2%B039%2727.4%22N+29%C2%B016%2716.7%22E+40.657611,+29.271306@40.6576111,29.2713056"
               target="_blank"
               rel="noopener noreferrer"
@@ -77,7 +79,7 @@ const Footer = () => {
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
               Merkez, Yalova
-            </a>
+            </Link>
           </div>
         </div>
         <div>
@@ -85,15 +87,15 @@ const Footer = () => {
             Sosyal Medya
           </span>
           <div className="flex items-center mt-1 space-x-3">
-            <a
+            <Link
               href="https://www.youtube.com/channel/kodhaber"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               <svg viewBox="0 0 26 18" fill="currentColor" className="h-5">
                 <path d="M23.4593 2.63137C23.1843 1.59561 22.3738 0.77987 21.3447 0.50304C19.4795 0 12 0 12 0C12 0 4.52059 0 2.65529 0.50304C1.62622 0.77991 0.815739 1.59561 0.540659 2.63137C0.040863 4.50876 0.040863 8.4258 0.040863 8.4258C0.040863 8.4258 0.040863 12.3427 0.540659 14.2201C0.815739 15.2559 1.62622 16.0376 2.65529 16.3145C4.52059 16.8175 12 16.8175 12 16.8175C12 16.8175 19.4794 16.8175 21.3447 16.3145C22.3738 16.0376 23.1843 15.2559 23.4593 14.2201C23.9591 12.3427 23.9591 8.4258 23.9591 8.4258C23.9591 8.4258 23.9591 4.50876 23.4593 2.63137zM9.5538 11.9821V4.86942L15.8051 8.4258L9.5538 11.9821z" />
               </svg>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.instagram.com/kodhaber/"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
@@ -101,15 +103,15 @@ const Footer = () => {
                 <circle cx="15" cy="15" r="4" />
                 <path d="M19.999,3h-10C6.14,3,3,6.141,3,10.001v10C3,23.86,6.141,27,10.001,27h10C23.86,27,27,23.859,27,19.999v-10   C27,6.14,23.859,3,19.999,3z M15,21c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S18.309,21,15,21z M22,9c-0.552,0-1-0.448-1-1   c0-0.552,0.448-1,1-1s1,0.448,1,1C23,8.552,22.552,9,22,9z" />
               </svg>
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.facebook.com/kodhaber/"
               className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
                 <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />
               </svg>
-            </a>
+            </Link>
           </div>
           <p className="mt-4 text-sm text-gray-500">
             Sosyal Medya Hesaplarımızı Takip Etmeyi Unutmayın.
@@ -134,28 +136,28 @@ const Footer = () => {
         </p>
         <ul className="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
           <li>
-            <a
+            <Link
               href="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               Sık Sorulan Sorular
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               Gizlilik Politikası
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/"
               className="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
             >
               Şartlar &amp; Koşullar
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
