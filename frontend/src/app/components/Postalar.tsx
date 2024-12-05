@@ -3,14 +3,13 @@ import Link from "next/link";
 import { HiOutlineThumbUp, HiChatAlt, HiShare } from "react-icons/hi";
 import { useState } from "react";
 
-// Prop türlerini tanımlayan arayüz
 interface PostProps {
   title: string;
   description: string;
-  profile: string; // Profil resmi URL'si
-  timestamp: string; // Zaman damgası
-  media?: string; // Medya URL'si (opsiyonel)
-  slug: string; // Posta özel URL parçası
+  profile: string;
+  timestamp: string;
+  media?: string;
+  slug: string;
 }
 
 function Postalar({
@@ -21,10 +20,10 @@ function Postalar({
   media,
   slug,
 }: PostProps) {
-  const [comments, setComments] = useState<string[]>([]); // Yorumları tutacak state
-  const [commentInput, setCommentInput] = useState<string>(""); // Yorum girişi için state
+  const [comments, setComments] = useState<string[]>([]);
+  const [commentInput, setCommentInput] = useState<string>("");
   const [showCommentForm, setShowCommentForm] = useState(false);
-  const [showModal, setShowModal] = useState(false); // Modal durumunu kontrol etmek için
+  const [showModal, setShowModal] = useState(false);
 
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,12 +38,11 @@ function Postalar({
   };
 
   const handleToggleModal = () => {
-    setShowModal(!showModal); // Modal'ı açıp kapatmak için
+    setShowModal(!showModal);
   };
 
   return (
     <div className="flex flex-col max-w-4xl mx-auto">
-      {/* Başlık ve Profil Bilgileri */}
       <Link href={`/gonderi/${slug}`} passHref>
         <div className="p-5 bg-white mt-5 rounded-t-lg shadow-sm cursor-pointer hover:bg-gray-50 transition-colors">
           <div className="flex items-center space-x-2">
@@ -64,7 +62,6 @@ function Postalar({
         </div>
       </Link>
 
-      {/* Medya Alanı */}
       {media && (
         <div className="relative h-56 md:h-96 bg-white">
           {media.includes("embed") ? (
@@ -91,7 +88,6 @@ function Postalar({
         </div>
       )}
 
-      {/* Beğen, Yorum ve Paylaş Butonları */}
       <div className="flex justify-between items-center rounded-b-lg bg-white shadow-md text-gray-500 p-3 mt-3 border-t">
         <div className="flex items-center space-x-1 cursor-pointer hover:bg-gray-100 p-2 rounded-xl">
           <HiOutlineThumbUp className="h-5 w-5" />
@@ -113,7 +109,6 @@ function Postalar({
         </div>
       </div>
 
-      {/* Yorum Ekleme Formu */}
       {showCommentForm && (
         <form
           onSubmit={handleCommentSubmit}
@@ -144,7 +139,6 @@ function Postalar({
         </form>
       )}
 
-      {/* Yorumları Göster */}
       <div className="mt-4 px-4">
         {comments.map((comment, index) => (
           <div key={index} className="flex items-start space-x-4 border-b py-4">
@@ -157,13 +151,11 @@ function Postalar({
               <p className="text-gray-900 font-semibold">Kemal Hakan</p>
               <p className="text-gray-700">{comment}</p>
               <div className="border-t mt-2 pt-2"></div>{" "}
-              {/* Yorumun altındaki çizgi */}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Modal İçeriği */}
       {showModal && (
         <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
           <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8 relative">
@@ -196,7 +188,6 @@ function Postalar({
                     <path d="M89.584 155.139V84.378h23.742l3.562-27.585H89.584V39.184c0-7.984 2.208-13.425 13.67-13.425l14.595-.006V1.08C115.325.752 106.661 0 96.577 0 75.52 0 61.104 12.853 61.104 36.452v20.341H37.29v27.585h23.814v70.761h28.48z" />
                   </svg>
                 </button>
-                {/* Diğer sosyal medya butonları */}
               </div>
             </div>
 

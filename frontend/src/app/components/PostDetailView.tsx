@@ -17,24 +17,25 @@ const PostDetailView: React.FC<PostDetailViewProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-start p-6 bg-white rounded-lg shadow-md max-w-2xl mx-auto mt-10">
-      {/* Başlık ve Profil */}
       <div className="flex items-center space-x-4 mb-2 w-full">
-        <Image src={profile} width={50} height={50} className="rounded-full" alt={title} />
+        <Image
+          src={profile}
+          width={50}
+          height={50}
+          className="rounded-full"
+          alt={title}
+        />
         <h2 className="text-xl font-semibold">{title}</h2>
       </div>
 
-      {/* Zaman Damgası */}
       <div className="w-full text-left mb-2">
         <p className="text-sm text-gray-500">{timestamp}</p>
       </div>
 
-      {/* Çizgi */}
-      <hr className="border-gray-300 w-full mb-4" /> {/* Çizgi */}
+      <hr className="border-gray-300 w-full mb-4" />
 
-      {/* Haber Başlığı */}
       <h3 className="text-3xl font-bold mb-2">{description}</h3>
 
-      {/* Medya Alanı */}
       {media && media.includes("embed") ? (
         <iframe
           src={media}
@@ -55,10 +56,10 @@ const PostDetailView: React.FC<PostDetailViewProps> = ({
         </div>
       ) : null}
 
-      {/* Statik Yazı */}
-      <p className="text-xl font-bold mb-2 text-left">Konuyu açıklayan önemli ilk yazı.</p>
+      <p className="text-xl font-bold mb-2 text-left">
+        Konuyu açıklayan önemli ilk yazı.
+      </p>
 
-      {/* Normal Boyutta Yazı */}
       <p className="text-base text-gray-700 text-left">
         Haberin geri kalanı ve daha ufak ayrıntılı verilen olması gereken bölge.
       </p>

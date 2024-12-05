@@ -3,28 +3,26 @@
 import { useState } from "react";
 import Image from "next/image";
 import { HiOutlineHome, HiOutlineSearch, HiOutlineBell } from "react-icons/hi";
-import LoginRegisterForm from "./LoginRegisterForm"; // LoginRegisterForm bileşenini import edin
-import Modal from "./Modal"; // Modal bileşenini import edin
-import Link from "next/link"; // Link bileşenini import edin
+import LoginRegisterForm from "./LoginRegisterForm";
+import Modal from "./Modal";
+import Link from "next/link";
 
 const Navbar2 = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Kullanıcı giriş durumu
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal görünürlüğünü kontrol etmek için durum
-  const [message, setMessage] = useState(""); // Mesaj durumu
-  const [isVisible, setIsVisible] = useState(false); // Mesajın görünürlüğü
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Dropdown menüsünün açılma durumu
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleBetaClick = () => {
-    setMessage("BETA'dayız, butonlar şu anda aktif değil."); // Mesajı ayarla
-    setIsVisible(true); // Mesajı görünür yap
+    setMessage("BETA'dayız, butonlar şu anda aktif değil.");
+    setIsVisible(true);
 
-    // 2 saniye sonra mesajı gizle
     setTimeout(() => {
       setIsVisible(false);
     }, 2000);
   };
 
-  // Seçeneklerin adları
   const dropdownOptions = [
     "Teknoloji",
     "Eğitim",
@@ -42,7 +40,7 @@ const Navbar2 = () => {
       <div className="px-1 py-1 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ml-64">
         <div className="relative flex items-center justify-between">
           <Link
-            href="/" // Ana sayfaya yönlendirme
+            href="/"
             aria-label="Company"
             title="Company"
             className="inline-flex items-center"
@@ -56,7 +54,6 @@ const Navbar2 = () => {
             />
           </Link>
 
-          {/* Geniş 3 logolu kısım */}
           <ul className="flex items-center justify-between space-x-4 lg:flex lg:w-1/3">
             <li>
               <Link
@@ -70,22 +67,21 @@ const Navbar2 = () => {
             </li>
             <li
               className="relative"
-              onMouseEnter={() => setDropdownOpen(true)} // Dropdown açma
-              onMouseLeave={() => setDropdownOpen(false)} // Dropdown kapama
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
             >
               <button
                 aria-label="Ara"
                 title="Ara"
-                className="font-medium tracking-wide text-gray-800 transition-colors duration-200 hover:text-teal-600 py-4 px-6" // Padding artırıldı
+                className="font-medium tracking-wide text-gray-800 transition-colors duration-200 hover:text-teal-600 py-4 px-6"
               >
                 <HiOutlineSearch className="inline-block w-6 h-6" />
               </button>
-              {/* Dropdown */}
+
               {dropdownOpen && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 top-full border border-gray-500 rounded-lg bg-white w-[500px] mt-0 z-50 transition-all duration-300 ease-in-out">
                   <div className="grid grid-cols-3 gap-4 p-4">
                     {" "}
-                    {/* 3 sütun düzeni */}
                     {dropdownOptions.map((option, index) => (
                       <button
                         key={index}
@@ -104,7 +100,7 @@ const Navbar2 = () => {
             <li>
               <button
                 onClick={() => {
-                  handleBetaClick(); // BETA mesajını göster
+                  handleBetaClick();
                 }}
                 aria-label="Bildirimler"
                 title="Bildirimler"
@@ -119,9 +115,9 @@ const Navbar2 = () => {
               <button
                 onClick={() => {
                   if (isLoggedIn) {
-                    setIsLoggedIn(false); // Çıkış yap
+                    setIsLoggedIn(false);
                   } else {
-                    setIsModalOpen(true); // Modal aç
+                    setIsModalOpen(true);
                   }
                 }}
                 className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded-full shadow-2xl bg-gray-300 hover:bg-sky-500 focus:shadow-outline focus:outline-none"
@@ -129,21 +125,18 @@ const Navbar2 = () => {
                 title="Sign up"
               >
                 {isLoggedIn ? "Çıkış Yap" : "Giriş Yap"}{" "}
-                {/* Buton metni giriş durumuna göre değişir */}
               </button>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* BETA Mesajı */}
       {isVisible && message && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-sky-500 text-slate-200 p-4 rounded shadow-md z-50 transition-opacity duration-1000 opacity-100">
           {message}
         </div>
       )}
 
-      {/* Modal Bileşeni */}
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <LoginRegisterForm

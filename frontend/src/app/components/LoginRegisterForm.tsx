@@ -1,5 +1,3 @@
-// app/components/LoginRegisterForm.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -7,26 +5,26 @@ import axios from "axios";
 import { FaGoogle } from "react-icons/fa";
 
 interface LoginRegisterFormProps {
-  onClose: () => void; // onClose fonksiyonunun türü
-  setIsLoggedIn: (value: boolean) => void; // Giriş durumu güncelleme fonksiyonu
+  onClose: () => void;
+  setIsLoggedIn: (value: boolean) => void;
 }
 
 const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({
   onClose,
   setIsLoggedIn,
 }) => {
-  const [isLogin, setIsLogin] = useState(true); // Varsayılan olarak giriş formu açık
+  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const API_LOGIN_URL = "http://localhost:8000/api/login"; // Giriş API URL'si
-  const API_REGISTER_URL = "http://localhost:8000/api/register"; // Kayıt API URL'si
+  const API_LOGIN_URL = "http://localhost:8000/api/login";
+  const API_REGISTER_URL = "http://localhost:8000/api/register";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrorMessage(""); // Önceki hata mesajını temizle
+    setErrorMessage("");
 
     try {
       const response = await axios.post(API_LOGIN_URL, {
@@ -36,18 +34,18 @@ const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({
 
       const token = response.data.token;
       console.log("Giriş başarılı, token:", token);
-      setIsLoggedIn(true); // Giriş durumu güncelle
-      alert("Başarıyla giriş yaptınız!"); // Başarı mesajı
-      onClose(); // Form başarılıysa modalı kapat
+      setIsLoggedIn(true);
+      alert("Başarıyla giriş yaptınız!");
+      onClose();
     } catch (error) {
       console.error("Giriş sırasında hata oluştu:", error);
-      setErrorMessage("Yanlış e-posta veya şifre."); // Hata mesajını ayarla
+      setErrorMessage("Yanlış e-posta veya şifre.");
     }
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrorMessage(""); // Önceki hata mesajını temizle
+    setErrorMessage("");
 
     try {
       const response = await axios.post(API_REGISTER_URL, {
@@ -57,18 +55,17 @@ const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({
       });
 
       console.log("Kayıt başarılı:", response.data);
-      setIsLogin(true); // Kayıt başarılı olduğunda giriş formuna geç
-      alert("Başarıyla kayıt oldunuz!"); // Başarı mesajı
-      onClose(); // Kayıt başarılıysa modalı kapat
+      setIsLogin(true);
+      alert("Başarıyla kayıt oldunuz!");
+      onClose();
     } catch (error) {
       console.error("Kayıt sırasında hata oluştu:", error);
-      setErrorMessage("Kayıt işlemi sırasında bir hata oluştu."); // Hata mesajını ayarla
+      setErrorMessage("Kayıt işlemi sırasında bir hata oluştu.");
     }
   };
 
   return (
     <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg max-w-4xl">
-      {/* Sol Taraf */}
       <div className="md:w-1/2 p-8">
         <h2 className="text-2xl font-bold mb-4">
           {isLogin ? "Giriş Yap" : "Kayıt Ol"}
@@ -82,15 +79,15 @@ const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({
           className="flex items-center bg-white border border-gray-300 py-2 px-4 rounded hover:shadow-lg"
           onClick={onClose}
         >
-          <FaGoogle className="mr-2" size={24} /> {/* Google logosu */}
+          <FaGoogle className="mr-2" size={24} />
           <span className="text-gray-800">Google ile Giriş Yap / Kayıt Ol</span>
         </button>
         <p className="mt-4 text-sm text-gray-500">
-          Üye olarak / giriş yaparak Yalova Konusuyor un Kullanım Koşulları ve Gizlilik Politikasını kabul etmiş olursunuz.
+          Üye olarak / giriş yaparak Yalova Konusuyor un Kullanım Koşulları ve
+          Gizlilik Politikasını kabul etmiş olursunuz.
         </p>
       </div>
 
-      {/* Sağ Taraf */}
       <div className="md:w-1/2 p-8 border-l border-gray-300">
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         {isLogin ? (
@@ -200,7 +197,7 @@ const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({
           Hesabınız yok mu?{" "}
           <button
             className="text-blue-500 hover:underline"
-            onClick={() => setIsLogin(!isLogin)} // Burada form geçişini sağlıyoruz
+            onClick={() => setIsLogin(!isLogin)}
           >
             {isLogin ? "Kayıt Ol" : "Giriş Yap"}
           </button>

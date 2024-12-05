@@ -1,9 +1,7 @@
-// app/components/VideoSection.tsx
-
 "use client";
 
-import React, { useState, useRef } from 'react';
-import Image from 'next/image';
+import React, { useState, useRef } from "react";
+import Image from "next/image";
 
 interface Video {
   id: string;
@@ -27,14 +25,14 @@ const VideoSection: React.FC = () => {
       id: "TMPmAHgy-wM",
       title: "Kısa Video - YouTube Shorts",
       thumbnail: "https://img.youtube.com/vi/TMPmAHgy-wM/0.jpg",
-      url: "https://www.youtube.com/embed/sph6U1b1EgQ?autoplay=1&playsinline=1", // Sadece autoplay parametresi eklendi
+      url: "https://www.youtube.com/embed/sph6U1b1EgQ?autoplay=1&playsinline=1",
     },
     {
       id: "VPzFzDjHhFI",
       title: "Diğer Kısa Video - YouTube Shorts",
       thumbnail: "https://img.youtube.com/vi/VPzFzDjHhFI/0.jpg",
-      url: "https://www.youtube.com/embed/VPzFzDjHhFI?autoplay=1&playsinline=1", // Sadece autoplay parametresi eklendi
-    }
+      url: "https://www.youtube.com/embed/VPzFzDjHhFI?autoplay=1&playsinline=1",
+    },
   ];
 
   const openFullscreen = () => {
@@ -55,7 +53,7 @@ const VideoSection: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="flex space-x-4 overflow-x-auto p-4 bg-gray-100 rounded-lg shadow-md">
-        {videos.map(video => (
+        {videos.map((video) => (
           <div key={video.id} className="flex flex-col items-center">
             <div className="relative w-24 h-24">
               <Image
@@ -64,9 +62,8 @@ const VideoSection: React.FC = () => {
                 layout="fill"
                 className="rounded-full cursor-pointer transition-transform transform hover:scale-105"
                 onClick={() => {
-                  setSelectedVideo(video.url); // Sadece tıklanınca video URL'sini ayarla
-                  // Burada tam ekran açma işlemini video açılmadan önce yapıyoruz
-                  setTimeout(openFullscreen, 100); // iframe'in render edilmesi için kısa bir bekleme süresi
+                  setSelectedVideo(video.url);
+                  setTimeout(openFullscreen, 100);
                 }}
               />
             </div>
@@ -74,9 +71,9 @@ const VideoSection: React.FC = () => {
           </div>
         ))}
       </div>
-  
+
       {selectedVideo && (
-        <div className="mt-4 w-full h-screen relative"> {/* Tam ekran için h-screen kullanıldı */}
+        <div className="mt-4 w-full h-screen relative">
           <iframe
             ref={videoRef}
             width="100%"
@@ -88,8 +85,8 @@ const VideoSection: React.FC = () => {
             allowFullScreen
             className="w-full h-full absolute top-0 left-0"
           ></iframe>
-          <button 
-            onClick={() => setSelectedVideo(null)} 
+          <button
+            onClick={() => setSelectedVideo(null)}
             className="absolute top-2 right-2 z-10 bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center"
           >
             <span className="text-xl font-bold">&times;</span>

@@ -1,8 +1,7 @@
 import React from 'react';
 
-// Props tipini tanımlayın
 interface Ads {
-  title: string; // title prop'unun tipi string
+  title: string;
 }
 
 function AdColumn({ title }: Ads) {
